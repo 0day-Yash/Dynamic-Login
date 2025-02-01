@@ -28,7 +28,8 @@
         </div>
     </section>
     
-    <script>
+    <script type="module">
+          import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm";
         // Supabase Connection
         const supabaseUrl = "https://ukvnejarulztpirhxcnl.supabase.co";
         const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVrdm5lamFydWx6dHBpcmh4Y25sIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzgzODk4NjksImV4cCI6MjA1Mzk2NTg2OX0.d3AngBNGUhNUkxK96p7OyfvwDViuxabZF5jb7EJhR1A"; // Replace with NEXT_PUBLIC_SUPABASE_ANON_KEY
