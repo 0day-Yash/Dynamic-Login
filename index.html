@@ -36,22 +36,25 @@
 
         // Handle Login
         document.getElementById("login-form").addEventListener("submit", async function (event) {
-            event.preventDefault();
-            
-            // Get values from input fields
-            const email = document.getElementById("email").value;
-            const password = document.getElementById("password").value;
+    event.preventDefault();  // Prevents form from submitting the default way
 
-            // Supabase Authentication
-            const { data, error } = await supabase.auth.signInWithPassword({ email, password });
+    // Get values from input fields
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
 
-            if (error) {
-                document.getElementById("error-message").textContent = "Invalid email or password!";
-            } else {
-                document.getElementById("error-message").textContent = "Login successful!";
-                window.location.href = "dashboard.html"; // Redirect to dashboard
-            }
-        });
+    // Supabase Authentication
+    const { data, error } = await supabase.auth.signInWithPassword({ email, password });
+
+    if (error) {
+        document.getElementById("error-message").textContent = "Invalid email or password!";
+    } else {
+        document.getElementById("error-message").textContent = "Login successful!";
+        
+        // ✅ Redirect the user properly
+        window.location.href = "/dashboard.html";  // Change this to your actual dashboard URL
+    }
+});
+
     </script>
     
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
