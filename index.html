@@ -3,35 +3,57 @@
 <head>
   <link rel="stylesheet" href="index.css">
   <title>Yash's Login Page</title>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
 </head>
 <body>
     <section>
         <div class="form-box">
             <div class="form-value">
-                <form action="">
+                <form id="login-form">
                     <h2>Login</h2>
                     <div class="inputbox">
                         <ion-icon name="mail-outline"></ion-icon>
-                        <input type="email" required>
-                        <label for="">Email</label>
+                        <input type="email" id="email" required>
+                        <label>Email</label>
                     </div>
                     <div class="inputbox">
                         <ion-icon name="lock-closed-outline"></ion-icon>
-                        <input type="password" required>
-                        <label for="">Password</label>
+                        <input type="password" id="password" required>
+                        <label>Password</label>
                     </div>
-                    <div class="forget">
-                        <label for=""><input type="checkbox">Remember Me  <a href="#">Forget Password</a></label>
-                      
-                    </div>
-                    <button>Log in</button>
-                    <div class="register">
-                        <p>Don't have a account <a href="#">Register</a></p>
-                    </div>
+                    <button type="submit">Log in</button>
+                    <p id="error-message" style="color: red;"></p>
                 </form>
             </div>
         </div>
     </section>
+    
+    <script>
+        // Supabase Connection
+        const supabaseUrl = "https://ukvnejarulztpirhxcnl.supabase.co";
+        const supabaseKey = "YOUR_PUBLIC_ANON_KEY"; // Replace with NEXT_PUBLIC_SUPABASE_ANON_KEY
+        const supabase = supabase.createClient(supabaseUrl, supabaseKey);
+
+        // Handle Login
+        document.getElementById("login-form").addEventListener("submit", async function (event) {
+            event.preventDefault();
+            
+            // Get values from input fields
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("password").value;
+
+            // Supabase Authentication
+            const { data, error } = await supabase.auth.signInWithPassword({ email, password });
+
+            if (error) {
+                document.getElementById("error-message").textContent = "Invalid email or password!";
+            } else {
+                document.getElementById("error-message").textContent = "Login successful!";
+                window.location.href = "dashboard.html"; // Redirect to dashboard
+            }
+        });
+    </script>
+    
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 </body>
